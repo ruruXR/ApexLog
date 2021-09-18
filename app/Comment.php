@@ -4,7 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comments extends Model
+class Comment extends Model
 {
-    //
+    public function post()
+    {
+        return $this->belongsTo('App\Post');    
+    }
+    protected $fillable = [
+        'post_id',
+        'name',
+        'comment'
+        ];
 }

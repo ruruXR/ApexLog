@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 class CreateCommentsTable extends Migration
 {
     /**
@@ -15,9 +13,11 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('commenter');
-			$table->text('comment');
-			$table->timestamps();
+            $table->timestamps();
+            $table->string('is_deleted', 4)->default('0');
+            $table->integer('post_id');
+            $table->string('name');
+            $table->text('comment');
         });
     }
 
