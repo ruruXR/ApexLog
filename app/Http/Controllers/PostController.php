@@ -9,19 +9,18 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return view('index')->with(['posts' => $post->getPaginateByLimit(5)]);
+        $post = Post::all();
+        return view('index')->with(['post' => $post]);
     }
 
     public function show(Post $post)
     {
         return view('show')->with(['post' => $post]);
     }
-
-    public function create()
+    public function create ()
     {
         return view('create');
     }
-
     public function store(Post $post, PostRequest $request) 
     {
         $input = $request['post'];

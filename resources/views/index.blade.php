@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
-        <h1>Blog Name</h1>
-        <p class='create'>[<a href='/posts/create'>create</a>]</p>
-        <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <a href='/posts/{{$post->id}}'><h2 class='title'>{{ $post->title }}</h2></a>
-                    <p class='body'>{{ $post->body }}</p>
-                </div>
-            @endforeach
-        </div>
-        <div class='paginate'>
-            {{ $posts->links() }}
-        </div>
-    </body>
-</html>
+@extends('layouts.layout')
+@section('content')
+
+<div class="col-xs-8 col-xs-offset-2">
+	@foreach($post as $post)
+	<h2>タイトル：{{ $posts->title }}
+	<small>投稿日：{{ date("y/m/d",strtotime($post->created_at)) }}</small>
+	</h2>
+	<p>カテゴリー：{{ $post->category->name }}</p>
+	<p>{{ $post->content }}</p>
+	<p href="/{post->id" class="btn btn-primary">続きを読む</p>
+	<p>コメント数：{{ $post->comment_count }}</p>
+	<hr />
+@endforeach
+
+</div>
+
+@stop
