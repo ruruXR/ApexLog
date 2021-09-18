@@ -1,25 +1,118 @@
-<!DOCTYPE HTML>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>Blog Name</h1>
-        <form action="/posts" method="POST">
+@extends('layouts.layout')
+ 
+@section('title', 'LaravelPjt BBS 投稿ページ')
+@section('keywords', 'キーワード1,キーワード2,キーワード3')
+@section('description', '投稿ページの説明文')
+@section('pageCss')
+<link href="/css/bbs/style.css" rel="stylesheet">
+@endsection
+ 
+@include('layouts.header')
+ 
+@section('content')
+<div class="container mt-4">
+    <div class="border p-4">
+        <h1 class="h4 mb-4 font-weight-bold">
+            投稿の新規作成
+        </h1>
+ 
+        <form method="POST" action="/posts" enctype="multipart/form-data">
             @csrf
-            <div class="title">
-                <h2>Title</h2>
-                <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
-                <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
-            </div>
-            <div class="body">
-                <h2>Body</h2>
-                <textarea name="post[body]" placeholder="今日も1日お疲れさまでした。">{{ old('post.body') }}</textarea>
-                <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
-            </div>
-            <input type="submit" value="保存"/>
+ 
+            <fieldset class="mb-4">
+ 
+                <div class="form-group">
+                    <label for="subject">
+                        名前
+                    </label>
+                    <input
+                        id="name"
+                        name="name"
+                        class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                        value="{{ old('name') }}"
+                        type="text"
+                    >
+                    @if ($errors->has('name'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('name') }}
+                        </div>
+                    @endif
+                </div>
+ 
+                <div class="form-group">
+                    <label for="subject">
+                        カテゴリー
+                    </label>
+                    <select 
+                    id="category_id"
+                    name="category_id"
+                    class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
+                    value="{{ old('category_id') }}"
+                    >
+                        @foreach($categories as $id => $name)
+                            <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+ 
+                <div class="form-group">
+                    <label for="subject">
+                        件名
+                    </label>
+                    <input
+                        id="subject"
+                        name="subject"
+                        class="form-control {{ $errors->has('subject') ? 'is-invalid' : '' }}"
+                        value="{{ old('subject') }}"
+                        type="text"
+                    >
+                    @if ($errors->has('subject'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('subject') }}
+                        </div>
+                    @endif
+                </div>
+ 
+                <div class="form-group">
+                    <label for="message">
+                        メッセージ
+                    </label>
+ 
+                    <textarea
+                        id="message"
+                        name="message"
+                        class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}"
+                        rows="4"
+                    >{{ old('message') }}</textarea>
+                    @if ($errors->has('message'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('message') }}
+                        </div>
+                    @endif
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        画像
+                    </lavel>
+                    <input 
+                        type="file" 
+                        name="image"
+                    >
+ 
+                <div class="mt-5">
+                    <a class="btn btn-secondary" href="/">
+                        キャンセル
+                    </a>
+ 
+                    <button type="submit" class="btn btn-primary">
+                        投稿する
+                    </button>
+                </div>
+            </fieldset>
         </form>
-        <div class="back">[<a href="/">back</a>]</div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection
+ 
+@include('layouts.footer')

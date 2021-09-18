@@ -3,16 +3,51 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use SoftDeletes;
-    
-    public function getPaginateByLimit(int $limit_count = 10)
-    {
-        // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
-    }
-    protected $fillable = ['title','body',];
+    public function comments() {
+		return $this->hasMany('App\Comment');
+	}
+	
+	public function category() {
+		return $this->belongsTo('App\Category');
+	}
+	
+	public function user()
+	{
+      return $this->belongsTo('App\User');
+	}
+	
+	public function getPaginateByLimit(int $limit_count = 10)
+	{
+		return $this->orderBy('updated_at','desc')->paginate($limit_count);
+	}
+	
+	public function scopeCategoryAt($query, $category_id)
+	{
+	    if (empty($category_id)) {
+	        return;
+	    }
+	 
+	    return $query->where('category_id', $category_id);
+	}
+	
+	public function scopeFuzzyName($query, $searchword)
+	{
+		if (empty($searchword)) {
+			return;
+			
+		}
+		return $query->where('name', 'like', "%{$searchword}%");
+	}
+	
+	protected $fillable = [
+		'name',
+		'user_id',
+        'subject',
+        'message', 
+        'category_id',
+        'image_path'
+		];
 }
