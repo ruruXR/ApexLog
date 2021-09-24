@@ -33,13 +33,16 @@ class Post extends Model
 	    return $query->where('category_id', $category_id);
 	}
 	
-	public function scopeFuzzyName($query, $searchword)
+	public function scopeFuzzyNameMessage($query, $searchword)
 	{
-		if (empty($searchword)) {
-			return;
-			
-		}
-		return $query->where('name', 'like', "%{$searchword}%");
+	    if (empty($searchword)) {
+	        return;
+	    }
+	 
+	    return $query->where(function ($query) use($searchword) {
+	        $query->orWhere('name', 'like', "%{$searchword}%")
+	              ->orWhere('message', 'like', "%{$searchword}%");
+	    });
 	}
 	
 	protected $fillable = [

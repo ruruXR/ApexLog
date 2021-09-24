@@ -7,18 +7,19 @@ use App\Category;
 use Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest; 
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(PostRequest $request)
+    public function index(Request $request)
     {
         $category = new Category;
-        $categories = $category->getList();
-        $category_id = $category->category_id;
+        $categories = $category->getList()->prepend('カテゴリー選択'.'');
+        $category_id = $request->category_id;
         $searchword = $request->searchword;
         $posts = Post::with(['comments', 'category'])
         ->categoryAt($category_id)
-        ->fuzzyName($searchword)
+        ->fuzzyNameMessage($searchword)
         ->paginate(10);
         return view('index')->with([
             'posts' => $posts,

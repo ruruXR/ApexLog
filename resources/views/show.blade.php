@@ -13,10 +13,11 @@
 <div class="container mt-4">
     <div class="border p-4">
         <div class="mb-4 text-right">
-            <a href="/" class="btn btn-secondary">一覧に戻る</a>
-            @if(Auth::user()->id === $post->user_id)
+            @auth
+            @if(Auth::id() === $post->user_id)
+            <a href="/" class="btn btn-secondary">一覧</a>
             <a href="/posts/{{ $post->id }}/edit" class="btn btn-info">
-                編集する
+                編集
             </a>
             <form
             style="display: inline-block;"
@@ -25,9 +26,16 @@
             >
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger">削除する</button>
+                <button class="btn btn-danger">削除</button>
             </form>
+            @else
+            <a href="/" class="btn btn-secondary">一覧</a>
         　　@endif
+            @endauth
+            @guest
+            <a href="/" class="btn btn-secondary">一覧</a>
+            @endguest
+            
         </div>
         <!-- 件名 -->
         <h1 class="h4 mb-4">

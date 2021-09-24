@@ -1,8 +1,8 @@
 @extends('layouts.layout')
  
-@section('title', 'LaravelPjt BBS 投稿の一覧ページ')
-@section('keywords', 'キーワード1,キーワード2,キーワード3')
-@section('description', '投稿一覧ページの説明文')
+@section('title', 'ApexLog')
+@section('keywords', 'Apex')
+@section('description', '')
 @section('pageCss')
 <link href="/css/bbs/style.css" rel="stylesheet">
 @endsection
@@ -21,38 +21,48 @@
     </div>
 @endif
 <div class="mt-4 mb-4">
-    <p>{{ $posts->total() }}件が見つかりました。</p>
-</div>
-<div class="mt-4 mb-4">
     <form class="form-inline" method="GET" action="/">
         <div class="form-group">
-            <input type="text" name="searchword" value="{{$searchword}}" class="form-control" placeholder="名前を入力してください">
+            <input type="text" name="searchword" value="{{$searchword}}" class="form-control" placeholder="名前を検索">
         </div>
         <input type="submit" value="検索" class="btn btn-info ml-2">
     </form>
 </div>
 <div class="mt-4 mb-4">
-    @foreach($categories as $id => $name)
-    <span class="btn"><a href="/" title="{{ $name }}">{{ $name }}</a></span>
-    @endforeach
+    <form class="form-inline" method="get" action="/">
+        <div class="form-group">
+            <select 
+            id="category_id"
+            name="category_id"
+            class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
+            value="{{ old('category_id') }}"
+            >
+                @foreach($categories as $id => $name)
+                    <option value="{{ $id }}">{{ $name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <input type="submit" value="検索" class="btn btn-info ml-2">
+    </form>
 </div>
-<div class="table-responsive">
+<div class="mt-4 mb-4">
+    <p>投稿が{{ $posts->total() }}件が見つかりました。</p>
+</div>
+<div class="table-hover-responsive">
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>ID</th>
             <th>カテゴリ</th>
-            <th>作成日時</th>
+            <th>投稿日時</th>
             <th>名前</th>
-            <th>件名</th>
-            <th>メッセージ</th>
-            <th>処理</th>
+            <th>タイトル</th>
+            <th>内容</th>
+            <th></th>
         </tr>
         </thead>
         <tbody id="tbl">
         @foreach ($posts as $post)
             <tr>
-                <td>{{ $post->id }}</td>
                 <td>{{ $post->category->name }}</td>
                 <td>{{ $post->created_at->format('Y.m.d') }}</td>
                 <td>{{ $post->name }}</td>
@@ -86,11 +96,10 @@
         @endforeach
         </tbody>
     </table>
-</div
-<div>
-    {{ $posts->links() }}
 </div>
-
+<div class='d-flex justify-content-center'>
+    {{ $posts->links() }}
+</div> 
 @endsection
  
 @include('layouts.footer')
