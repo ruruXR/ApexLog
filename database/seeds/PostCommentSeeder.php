@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class PostCommentSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class PostCommentSeeder extends Seeder
         {
             \App\Post::create([
                 'user_id' => 1,
-                'category_id' => 1,
+                'category_id' => 5,
                 'subject' => $i.'番目の投稿',
                 'message' => $bodydammy,
                 'name' => '名無しさん',
@@ -36,6 +37,18 @@ class PostCommentSeeder extends Seeder
             
         \App\Category::create([
             'name' => 'オリンパス',
+            ]);
+        \App\Category::create([
+            'name' => 'ワールズエッジ',
+            ]);
+        \App\Category::create([
+            'name' => 'キングズキャニオン',
+            ]);
+        \App\Category::create([
+            'name' => 'アリーナ',
+            ]);
+        \App\Category::create([
+            'name' => 'その他',
             ]);
     }
 }

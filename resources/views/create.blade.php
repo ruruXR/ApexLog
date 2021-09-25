@@ -1,8 +1,8 @@
 @extends('layouts.layout')
  
-@section('title', 'LaravelPjt BBS 投稿ページ')
-@section('keywords', 'キーワード1,キーワード2,キーワード3')
-@section('description', '投稿ページの説明文')
+@section('title', 'ApexLog')
+@section('keywords', 'Apex')
+@section('description', '')
 @section('pageCss')
 <link href="/css/bbs/style.css" rel="stylesheet">
 @endsection

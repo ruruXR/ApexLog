@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title')｜magicmissile.info</title>
+    <title>@yield('title')</title>
     <meta name="description" itemprop="description" content="@yield('description')">
     <meta name="keywords" itemprop="keywords" content="@yield('keywords')">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
