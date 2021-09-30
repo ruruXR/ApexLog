@@ -4,7 +4,7 @@
 @section('keywords', 'Apex')
 @section('description', '')
 @section('pageCss')
-<link href="/css/bbs/style.css" rel="stylesheet">
+<!--<link href="/css/bbs/style.css" rel="stylesheet">-->
 @endsection
  
 @include('layouts.header')
@@ -73,24 +73,35 @@
                 @endif
                 </td>
                 <td class="text-nowrap">
-                    @auth
-                    @if(Auth::id() === $post->user_id)
-                    <p><a href="/posts/{{ $post->id }}" class="btn btn-primary btn-sm">詳細</a></p>
-                    <p><a href="/posts/{{ $post->id }}/edit" class="btn btn-info btn-sm">編集</a></p>
-                    <p>
-                        <form method="POST" action="/posts/{{ $post->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm">削除</button>
-                        </form>
-                    </p>
+                    @can('isAdmin')
+                        <p><a href="/posts/{{ $post->id }}" class="btn btn-primary btn-sm">詳細</a></p>
+                        <p>
+                            <form method="POST" action="/posts/{{ $post->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">削除</button>
+                            </form>
+                        </p>
                     @else
-                    <p><a href="/posts/{{ $post->id }}" class="btn btn-primary btn-sm">詳細</a></p>
-                    @endif
-                    @endauth
-                    @guest
-                    <p><a href="/posts/{{ $post->id }}" class="btn btn-primary btn-sm">詳細</a></p>
-                    @endguest
+                        @auth
+                            @if(Auth::id() === $post->user_id)
+                                <p><a href="/posts/{{ $post->id }}" class="btn btn-primary btn-sm">詳細</a></p>
+                                <p><a href="/posts/{{ $post->id }}/edit" class="btn btn-info btn-sm">編集</a></p>
+                                <p>
+                                    <form method="POST" action="/posts/{{ $post->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">削除</button>
+                                    </form>
+                                </p>
+                            @else
+                                <p><a href="/posts/{{ $post->id }}" class="btn btn-primary btn-sm">詳細</a></p>
+                            @endif
+                        @endauth
+                        @guest
+                            <p><a href="/posts/{{ $post->id }}" class="btn btn-primary btn-sm">詳細</a></p>
+                        @endguest
+                    @endcan
                 </td>
             </tr>
         @endforeach

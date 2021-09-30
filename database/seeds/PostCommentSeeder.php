@@ -18,7 +18,7 @@ class PostCommentSeeder extends Seeder
         for ($i = 1; $i < 51; $i++) 
         {
             \App\Post::create([
-                'user_id' => 1,
+                'user_id' => 2,
                 'category_id' => 5,
                 'subject' => $i.'番目の投稿',
                 'message' => $bodydammy,

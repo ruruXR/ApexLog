@@ -29,7 +29,7 @@
                     @else
                         <li class="nav-item">
                             <div class="navbar-dark bg-dark">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="logout" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     ログアウト

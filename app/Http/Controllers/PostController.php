@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
+use App\User;
 use Storage;
+use Gate;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest; 
 use Illuminate\Http\Request;
@@ -25,13 +27,17 @@ class PostController extends Controller
             'posts' => $posts,
             'categories' => $categories,
             'category_id' => $category_id,
-            'searchword' => $searchword
+            'searchword' => $searchword,
             ]);
     }
 
     public function show(Post $post)
     {
-        return view('show')->with(['post' => $post]);
+        $likePosts = Auth::user()->likePosts()->pluck('post_id');
+        return view('show')->with([
+            'post' => $post,
+            'likePosts' => $likePosts
+            ]);
     }
     public function create ()
     {
@@ -91,9 +97,15 @@ class PostController extends Controller
     }
     public function destroy(Post $post)
     {
-        $this->authorize('delete', $post);
-        $post->comments()->delete();
-        $post->delete();
-        return redirect('/')->with('poststatus', '投稿を削除しました');;
+        if(Gate::allows('isAdmin')){
+            $post->comments()->delete();
+            $post->delete();
+            return redirect('/')->with('poststatus', '投稿を削除しました');;
+        }else{
+            $this->authorize('delete', $post);
+            $post->comments()->delete();
+            $post->delete();
+            return redirect('/')->with('poststatus', '投稿を削除しました');;
+        }
     }
 }
