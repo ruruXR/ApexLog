@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+	// リレーション関係
     public function comments() {
 		return $this->hasMany('App\Comment');
 	}
@@ -24,6 +25,7 @@ class Post extends Model
 		return $this->orderBy('updated_at','desc')->paginate($limit_count);
 	}
 	
+	//任意のカテゴリーに属しているpostを探索
 	public function scopeCategoryAt($query, $category_id)
 	{
 	    if (empty($category_id)) {
@@ -33,6 +35,7 @@ class Post extends Model
 	    return $query->where('category_id', $category_id);
 	}
 	
+	// 任意のwordが含まれているpostを探索
 	public function scopeFuzzyNameMessage($query, $searchword)
 	{
 	    if (empty($searchword)) {

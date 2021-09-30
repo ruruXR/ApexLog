@@ -4,7 +4,8 @@
 @section('keywords', 'Apex')
 @section('description', '')
 @section('pageCss')
-<link href="/css/bbs/style.css" rel="stylesheet">
+<!--<link href="/css/bbs/style.css" rel="stylesheet">-->
+<script src="{{ mix('js/app.js') }}" defer></script>
 @endsection
  
 @include('layouts.header')
@@ -12,30 +13,54 @@
 @section('content')
 <div class="container mt-4">
     <div class="border p-4">
-        <div class="mb-4 text-right">
-            @auth
-            @if(Auth::id() === $post->user_id)
-            <a href="/" class="btn btn-secondary">一覧</a>
-            <a href="/posts/{{ $post->id }}/edit" class="btn btn-info">
-                編集
-            </a>
-            <form
-            style="display: inline-block;"
-            method="POST"
-            action="/posts/{{ $post->id }}"
-            >
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger">削除</button>
-            </form>
-            @else
-            <a href="/" class="btn btn-secondary">一覧</a>
-        　　@endif
-            @endauth
-            @guest
-            <a href="/" class="btn btn-secondary">一覧</a>
-            @endguest
-            
+        <div id="app">
+            <div class="mb-4 text-right">
+                @can('isAdmin')
+                    <a href="/" class="btn btn-secondary">一覧</a>
+                    <form
+                    style="display: inline-block;"
+                    method="POST"
+                    action="/posts/{{ $post->id }}"
+                    >
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">削除</button>
+                    </form>
+                @else
+                    @auth
+                        @if(Auth::id() === $post->user_id)
+                            <a href="/" class="btn btn-secondary">一覧</a>
+                            <a href="/posts/{{ $post->id }}/edit" class="btn btn-info">
+                                編集
+                            </a>
+                            <form
+                            style="display: inline-block;"
+                            method="POST"
+                            action="/posts/{{ $post->id }}"
+                            >
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger">削除</button>
+                            </form>
+                        @else
+                            <a href="/" class="btn btn-secondary">一覧に戻る</a>
+                            <form
+                            method="POST"
+                            action="/like/{{ $post->id }}"
+                            >
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                お気に入り
+                            </button>
+                            </form>
+                            <like-component :post-id="{{ $post->id }}" :liked-data="{{ $likePosts  }}"></like-component>
+                　　      @endif
+                    @endauth
+                    @guest
+                        <a href="/" class="btn btn-secondary">一覧</a>
+                    @endguest
+                @endcan
+            </div>
         </div>
         <!-- 件名 -->
         <h1 class="h4 mb-4">

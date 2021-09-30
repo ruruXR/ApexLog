@@ -7,15 +7,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.header-logo　{
-    float: left;
-    font-size: 36px;
-    padding: 20px 40px;
-}
-.header-list {
-    float: left;
-    a {
-        float: left;
-        padding: 33px 20px;
+.container {
+    background-color: #EEEEEE;
+    .table-hover-responsive {
+    background-color: #FFFFFF;
     }
-} 
+}
