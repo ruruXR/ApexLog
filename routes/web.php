@@ -2,7 +2,6 @@
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/','PostController@index');
     Route::post('/posts', 'PostController@store');
     Route::get('/posts/create', 'PostController@create');
     Route::put('/posts/{post}', 'PostController@update');
@@ -16,5 +15,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/contact/thanks', 'ContactController@send')->name('contact.send');
     });
 
-
+Route::get('/','PostController@index');
 Route::get('/posts/{post}', 'PostController@show')->name('show');

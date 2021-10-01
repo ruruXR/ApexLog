@@ -22,14 +22,10 @@
     @yield('pageCss')
 </head>
 <body>
-    
-    @yield('header')
-    
     <div class="container">
+        @yield('header')
         @yield('content')
-    </div><!--//container-->
-    
+    </div>
     @yield('footer')
-    
  </body>
 </html>

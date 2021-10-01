@@ -1,48 +1,30 @@
 @section('header')
-    <nav class="navbar navbar-expand-md navbar-light navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                ApexLog
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">ログイン</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">新規登録</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item">
-                            <div class="navbar-dark bg-dark">
-                                <a class="logout" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    ログアウト
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
+<header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+            @guest
+                <a class="text-muted" href="{{ route('login') }}">ログイン</a>
+                @if (Route::has('register'))
+                    <a class="text-muted" href="{{ route('register') }}">新規登録</a>
+                @endif
+            @else
+                <a class="text-muted" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"
+                >
+                ログアウト
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endguest
+      </div>
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="/">ApexLog</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+          <a class="text-muted" href="/posts/create">投稿</a>
+      </div>
+    </div>
+</header>
 @endsection

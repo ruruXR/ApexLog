@@ -44,15 +44,6 @@
                             </form>
                         @else
                             <a href="/" class="btn btn-secondary">一覧に戻る</a>
-                            <form
-                            method="POST"
-                            action="/like/{{ $post->id }}"
-                            >
-                            @csrf
-                            <button type="submit" class="btn btn-primary">
-                                お気に入り
-                            </button>
-                            </form>
                             <like-component :post-id="{{ $post->id }}" :liked-data="{{ $likePosts  }}"></like-component>
                 　　      @endif
                     @endauth
