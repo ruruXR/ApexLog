@@ -16,9 +16,10 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $category = new Category;
-        $categories = $category->getList()->prepend('カテゴリー選択'.'');
+        $categories = $category->getList();
         $category_id = $request->category_id;
         $searchword = $request->searchword;
+        // dd(Auth::user()->likePosts());
         $posts = Post::with(['comments', 'category'])
         ->categoryAt($category_id)
         ->fuzzyNameMessage($searchword)

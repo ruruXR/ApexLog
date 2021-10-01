@@ -25,7 +25,6 @@ class Post extends Model
 		return $this->orderBy('updated_at','desc')->paginate($limit_count);
 	}
 	
-	//任意のカテゴリーに属しているpostを探索
 	public function scopeCategoryAt($query, $category_id)
 	{
 	    if (empty($category_id)) {
