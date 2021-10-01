@@ -25,9 +25,9 @@ class Post extends Model
 		return $this->orderBy('updated_at','desc')->paginate($limit_count);
 	}
 	
-	public function scopeAt($query, $post_id)
+	public function scopeCategoryAt($query, $category_id)
 	{
-	    if (empty($post_id)) {
+	    if (empty($category_id)) {
 	        return;
 	    }
 	 
