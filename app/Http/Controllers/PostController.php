@@ -37,11 +37,21 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $url = url()->previous();
+        $user_id = Auth::id();
+        if($user_id == null){
+            return view('show')->with([
+            'post' => $post,
+            'url' => $url,
+            ]);
+        }else{
         $likePosts = Auth::user()->likePosts()->pluck('post_id');
         return view('show')->with([
             'post' => $post,
-            'likePosts' => $likePosts
+            'likePosts' => $likePosts,
+            'url' => $url,
             ]);
+        }
     }
     public function create ()
     {

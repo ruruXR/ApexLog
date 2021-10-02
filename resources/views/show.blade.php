@@ -29,7 +29,7 @@
                 @else
                     @auth
                         @if(Auth::id() === $post->user_id)
-                            <a href="/" class="btn btn-secondary">一覧</a>
+                            <a href="{{ $url }}" class="btn btn-secondary">一覧</a>
                             <a href="/posts/{{ $post->id }}/edit" class="btn btn-info">
                                 編集
                             </a>
@@ -43,12 +43,12 @@
                                 <button class="btn btn-danger">削除</button>
                             </form>
                         @else
-                            <a href="/" class="btn btn-secondary">一覧に戻る</a>
+                            <a href="{{ $url }}" class="btn btn-secondary">一覧に戻る</a>
                             <like-component :post-id="{{ $post->id }}" :liked-data="{{ $likePosts  }}"></like-component>
                 　　      @endif
                     @endauth
                     @guest
-                        <a href="/" class="btn btn-secondary">一覧</a>
+                        <a href="{{ $url }}" class="btn btn-secondary">一覧</a>
                     @endguest
                 @endcan
             </div>
