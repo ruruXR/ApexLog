@@ -19,16 +19,19 @@ class PostController extends Controller
         $categories = $category->getList();
         $category_id = $request->category_id;
         $searchword = $request->searchword;
-        // dd(Auth::user()->likePosts());
+        $post_id = $request->post_id;
+        $user_id = Auth::id();
         $posts = Post::with(['comments', 'category'])
         ->categoryAt($category_id)
         ->fuzzyNameMessage($searchword)
+        ->PostAt($post_id)
         ->paginate(10);
         return view('index')->with([
             'posts' => $posts,
             'categories' => $categories,
             'category_id' => $category_id,
             'searchword' => $searchword,
+            'user_id' => $user_id,
             ]);
     }
 

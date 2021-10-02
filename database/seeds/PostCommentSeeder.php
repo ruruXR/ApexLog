@@ -1,7 +1,8 @@
 <?php
 
+use App\Post;
+use App\Comment;
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 
 class PostCommentSeeder extends Seeder
 {
@@ -12,28 +13,8 @@ class PostCommentSeeder extends Seeder
      */
     public function run()
     {
-        $bodydammy = 'この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。';
-        $commentdammy = 'コメントはダミーだよ。ダミーコメントです。';
-        
-        for ($i = 1; $i < 51; $i++) 
-        {
-            \App\Post::create([
-                'user_id' => 2,
-                'category_id' => 5,
-                'subject' => $i.'番目の投稿',
-                'message' => $bodydammy,
-                'name' => '名無しさん',
-            ]);
-            
-            for ($j = 1; $j < 21; $j++)
-            {
-            \App\Comment::create([
-                'post_id' => $i,
-                'name' => '名無しさん',
-                'comment' => $commentdammy,
-                ]);
-            }
-        }
+        factory(Post::class, 50)->create();
+        factory(Comment::class, 200)->create();
             
         \App\Category::create([
             'name' => 'オリンパス',

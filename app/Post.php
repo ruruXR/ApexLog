@@ -34,6 +34,15 @@ class Post extends Model
 	    return $query->where('category_id', $category_id);
 	}
 	
+	public function scopePostAt($query, $post_id)
+	{
+	    if (empty($post_id)) {
+	        return;
+	    }
+	 
+	    return $query->where('user_id', $post_id);
+	}
+	
 	// 任意のwordが含まれているpostを探索
 	public function scopeFuzzyNameMessage($query, $searchword)
 	{
