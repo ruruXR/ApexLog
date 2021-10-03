@@ -60,7 +60,7 @@ class PostController extends Controller
     public function create ()
     {
         $category = new Category;
-        $categories = $category->getList()->prepend('選択'.'');
+        $categories = $category->getList()->prepend('選択','');
         return view('create')->with(['categories' => $categories]);
     }
     public function store(PostRequest $request,Post $post) 

@@ -53,6 +53,11 @@
                             <option value="{{ $id }}">{{ $name }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('category'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('category_id') }}
+                        </div>
+                    @endif
                 </div>
  
                 <div class="form-group">
@@ -98,7 +103,14 @@
                     <input 
                         type="file" 
                         name="image"
+                        class="form-control-file {{ $errors->has('image') ? 'is-invalid' : '' }}"
+                        value="{{ old('image') }}"
                     >
+                    @if ($errors->has('image'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('image') }}
+                        </div>
+                    @endif
  
                 <div class="mt-5">
                     <a class="btn btn-secondary" href="/">
