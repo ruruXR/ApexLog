@@ -105,6 +105,12 @@
                     type="hidden"
                     value="{{ $post->id }}"
                 >
+                
+                <input
+                    name="url"
+                    type="hidden"
+                    value="{{ $url }}"
+                >
              
                 <div class="form-group">
                     <label for="subject">

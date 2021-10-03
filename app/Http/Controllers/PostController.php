@@ -35,9 +35,13 @@ class PostController extends Controller
             ]);
     }
 
-    public function show(Post $post)
+    public function show(Post $post,Request $request)
     {
-        $url = url()->previous();
+        if ($request->session()->has('url')) {
+            $url = $request->session()->pull('url', 'default');
+        }else{
+            $url = url()->previous();
+        }
         $user_id = Auth::id();
         if($user_id == null){
             return view('show')->with([
