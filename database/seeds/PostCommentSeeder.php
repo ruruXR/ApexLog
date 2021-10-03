@@ -2,6 +2,8 @@
 
 use App\Post;
 use App\Comment;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
 class PostCommentSeeder extends Seeder
@@ -16,6 +18,15 @@ class PostCommentSeeder extends Seeder
         factory(Post::class, 50)->create();
         factory(Comment::class, 200)->create();
             
+        \App\User::create([
+            'name' => 'administrator',
+            'email' => 'administrator@example.com',
+            'password' => Hash::make('qwertyuiop'),
+            'role' => 'administrator',
+        ]);
+        
+        factory(User::class, 5)->create();
+    
         \App\Category::create([
             'name' => 'オリンパス',
             ]);
