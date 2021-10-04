@@ -1,7 +1,8 @@
 <?php
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::group(['middleware' => 'auth'], function(){
+// Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/posts', 'PostController@store');
     Route::get('/posts/create', 'PostController@create');
     Route::put('/posts/{post}', 'PostController@update');

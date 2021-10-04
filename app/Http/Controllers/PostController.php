@@ -17,32 +17,41 @@ class PostController extends Controller
     {
         $category = new Category;
         $categories = $category->getList();
+        $auth_id = Auth::id();
+        
+        // 検索に使う情報の取得
         $category_id = $request->category_id;
         $searchword = $request->searchword;
-        $post_id = $request->post_id;
-        $user_id = Auth::id();
+        $user_id = $request->user_id;
+        $id = $request->id;
+        
         $posts = Post::with(['comments', 'category'])
         ->categoryAt($category_id)
         ->fuzzyNameMessage($searchword)
-        ->PostAt($post_id)
-        ->paginate(10);
+        ->PostAt($user_id)
+        ->LikeAt($id)
+        ->Paginate(10);
+        
         return view('index')->with([
             'posts' => $posts,
             'categories' => $categories,
             'category_id' => $category_id,
             'searchword' => $searchword,
-            'user_id' => $user_id,
+            'auth_id' => $auth_id,
             ]);
     }
 
     public function show(Post $post,Request $request)
     {
+        // 一覧のソート情報の保持
         if ($request->session()->has('url')) {
             $url = $request->session()->pull('url', 'default');
         }else{
             $url = url()->previous();
         }
+        
         $user_id = Auth::id();
+        
         if($user_id == null){
             return view('show')->with([
             'post' => $post,
@@ -65,6 +74,7 @@ class PostController extends Controller
     }
     public function store(PostRequest $request,Post $post) 
     {
+        // 画像が投稿された場合にs3に保存
         $image_path = null;
         if($request->hasFile('image'))
         {
@@ -72,6 +82,8 @@ class PostController extends Controller
             $path = Storage::disk('s3')->putFile('', $image, 'public');
             $image_path = Storage::disk('s3')->url($path);   
         }
+        
+        // 保存
         $user_id = Auth::id();
         $savedata = [
         'name' => $request->name,
@@ -94,6 +106,7 @@ class PostController extends Controller
     }
     public function update(PostRequest $request,Post $post)
     {
+        // 画像が投稿された場合にs3に保存
         $image_path = null;
         if($request->hasFile('image'))
         {
@@ -101,6 +114,8 @@ class PostController extends Controller
             $path = Storage::disk('s3')->putFile('', $image, 'public');
             $image_path = Storage::disk('s3')->url($path);   
         }
+        
+        // 保存
         $user_id = Auth::id();
         $savedata = [
         'name' => $request->name,
@@ -115,6 +130,7 @@ class PostController extends Controller
     }
     public function destroy(Post $post)
     {
+        
         if(Gate::allows('isAdmin')){
             $post->comments()->delete();
             $post->delete();

@@ -1892,6 +1892,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["postId", "likedData"],
@@ -37630,15 +37640,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "a",
-    {
-      class: [_vm.isActiveTrue === true ? "btn btn-light" : "btn btn-primary"],
-      staticStyle: { display: "inline-block" },
-      on: { click: _vm.storeOrDelete }
-    },
-    [_vm._v("\n  お気に入り\n")]
-  )
+  return _vm.isActiveTrue
+    ? _c(
+        "a",
+        {
+          staticClass: "btn btn-secondary",
+          staticStyle: { display: "inline-block" },
+          on: { click: _vm.storeOrDelete }
+        },
+        [_vm._v("\n  お気に入りに登録\n")]
+      )
+    : _c(
+        "a",
+        {
+          staticClass: "btn btn-primary",
+          staticStyle: { display: "inline-block" },
+          on: { click: _vm.storeOrDelete }
+        },
+        [_vm._v("\n  お気に入りを外す\n")]
+      )
 }
 var staticRenderFns = []
 render._withStripped = true

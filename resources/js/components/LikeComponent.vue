@@ -2,10 +2,20 @@
   <a
   style="display: inline-block;"
   v-on:click="storeOrDelete"
-  :class="[isActiveTrue === true ? 'btn btn-light' : 'btn btn-primary']"
+  v-if="isActiveTrue"
+  class="btn btn-secondary"
   >
-    お気に入り
+    お気に入りに登録
   </a>
+  <a
+  style="display: inline-block;"
+  v-on:click="storeOrDelete"
+  v-else
+  class="btn btn-primary"
+  >
+    お気に入りを外す
+  </a>
+  
 </template>
 
 <script>

@@ -5,7 +5,7 @@
             @guest
                 <a class="text-muted" href="{{ route('login') }}">ログイン</a>
                 @if (Route::has('register'))
-                    <a class="text-muted" href="{{ route('register') }}">新規登録</a>
+                    <a class="text-muted" href="{{ route('register') }}">登録</a>
                 @endif
             @else
                 <a class="text-muted" href="{{ route('logout') }}"

@@ -27,10 +27,14 @@
         <input type="submit" value="検索" class="btn btn-info ml-2">
     </form>
     </div>
-    <div class="p-2 bd-highlight">
-        <a class="btn btn-info ml-2" href="/?post_id={{ $user_id }}">自分の投稿</a>
-    </div>
-        
+    @auth
+        <div class="p-2 bd-highlight">
+            <a class="btn btn-info ml-2" href="/?user_id={{ $auth_id }}">自分の投稿</a>
+        </div>
+        <div class="p-2 bd-highlight">
+            <a class="btn btn-info ml-2" href="/?id={{ $auth_id }}">お気に入り</a>
+        </div>
+    @endauth
         
 </div>
 
