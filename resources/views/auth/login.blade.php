@@ -53,15 +53,15 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     ログイン
                                 </button>
-
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         パスワードを忘れましたか？
                                     </a>
                                 @endif
+                                <a href="login/twitter" class="btn btn-primary"><i class="fab fa-twitter"></i>Twtterアカウントでログイン</a>
                             </div>
                         </div>
                     </form>

@@ -51,6 +51,7 @@
                         <a href="{{ $url }}" class="btn btn-secondary">一覧</a>
                     @endguest
                 @endcan
+                <!--<a href="/posts/{{ $post->id }}/tweet" class="btn btn-primary">シェア</a>-->
             </div>
         </div>
         <!-- 件名 -->

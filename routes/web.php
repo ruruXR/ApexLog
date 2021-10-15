@@ -10,6 +10,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/posts/{post}', 'PostController@update');
     Route::delete('/posts/{post}', 'PostController@destroy');
     Route::get('/posts/{post}/edit', 'PostController@edit');
+    Route::get('/posts/{post}/tweet', 'TwitterController@tweet');
     Route::post('/comments', 'CommentController@store');
     Route::post('/like/{post}', 'LikeController@like');
     Route::post('/unlike/{post}', 'LikeController@unlike');
