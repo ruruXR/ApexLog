@@ -1,6 +1,8 @@
 <?php
 
 Auth::routes(['verify' => true]);
+Route::get('login/twitter', 'Auth\LoginController@redirectToTwitterProvider');
+Route::get('login/twitter/callback', 'Auth\LoginController@handleTwitterProviderCallback');
 Route::group(['middleware' => 'auth'], function(){
 // Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/posts', 'PostController@store');
