@@ -32,6 +32,8 @@ class PostController extends Controller
         ->LikeAt($id)
         ->Paginate(10);
         
+        
+        
         return view('index')->with([
             'posts' => $posts,
             'categories' => $categories,
