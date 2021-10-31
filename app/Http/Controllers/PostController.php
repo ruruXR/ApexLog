@@ -33,7 +33,7 @@ class PostController extends Controller
         ->LikeAt($id)
         ->Paginate(10);
         
-        
+        dd($posts);
         
         return view('index')->with([
             'posts' => $posts,
