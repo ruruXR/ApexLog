@@ -10,7 +10,6 @@ use Gate;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest; 
 use Illuminate\Http\Request;
-use Socialite;
 
 class PostController extends Controller
 {
@@ -33,8 +32,6 @@ class PostController extends Controller
         ->LikeAt($id)
         ->Paginate(10);
         
-        dd($posts);
-        
         return view('index')->with([
             'posts' => $posts,
             'categories' => $categories,
@@ -52,9 +49,6 @@ class PostController extends Controller
         }else{
             $url = url()->previous();
         }
-        
-        $user = Socialite::with("twitter")->user();
-        dd($user);
         
         $user_id = Auth::id();
         

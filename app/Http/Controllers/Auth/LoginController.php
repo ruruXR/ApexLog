@@ -50,12 +50,13 @@ class LoginController extends Controller
 
         try {
             $user = Socialite::with("twitter")->user();
+            dd($user);
         } 
         catch (\Exception $e) {
             return redirect('/login')->with('oauth_error', 'ログインに失敗しました');
         }
        
-        $myinfo = User::firstOrCreate(['token' => $user->token ],['name' => $user->nickname]);
+        $myinfo = User::firstOrCreate(['token' => $user->token ],['name' => $user->getNickname()],['image' => $user->getAvatar()]);
         Auth::login($myinfo);
         return redirect()->to('/');
     
