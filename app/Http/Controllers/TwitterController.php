@@ -20,6 +20,7 @@ class TwitterController extends Controller
         $twitter->post("statuses/update", [
             "status" =>
                 'タイトル「' . $title . '」' . PHP_EOL .
+                '#Apex #Apex募集' . PHP_EOL .
                 'https://www.holy-place-photo.com/photos/' . $id
         ]);
     }
