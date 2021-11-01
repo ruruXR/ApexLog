@@ -10,6 +10,23 @@
 @include('layouts.header')
  
 @section('content')
+<div class="nav-scroller">
+    <nav class="nav d-flex justify-content-between">
+        @foreach($categories as $id => $name)
+            <a class="p-2 text-muted" href="/?category_id={{ $id }}">{{ $name }}</a>
+        @endforeach
+    </nav>
+</div>
+
+<div class="d-flex flex-row mt-4 mb-4">
+    <div class="p-2 bd-highlight">
+    <form class="form-inline" method="GET" action="/">
+        <div class="form-group">
+            <input type="text" name="searchword" value="{{$searchword}}" class="form-control" placeholder="キーワードを検索">
+        </div>
+        <input type="submit" value="検索" class="btn btn-info ml-2">
+    </form>
+</div>
 @if (session('poststatus'))
     <div class="alert alert-success mt-4 mb-4">
         {{ session('poststatus') }}
@@ -17,11 +34,11 @@
 @endif
 <div class="row jumbotron p-3 p-md-5 text-white rounded bg-dark">
     @if($user->image_path == null)
-        <div class="col-md-6 mr-3">
+        <div class="col-md-6">
             <img src="https://bbs-backet.s3.ap-northeast-1.amazonaws.com/ROQCH01h3Zx72NhHeYdqUgLWMFQg1yTfxPmddyQP.jpg" class="img-fuild">
         </div>
     @else
-        <div class="col-md-6 mr-3">
+        <div class="col-md-6">
             <img src="{{ $user->image_path }}" class="img-fuild">
         </div>
     @endif

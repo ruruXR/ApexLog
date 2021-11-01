@@ -22,14 +22,14 @@
     <div class="p-2 bd-highlight">
     <form class="form-inline" method="GET" action="/">
         <div class="form-group">
-            <input type="text" name="searchword" value="{{$searchword}}" class="form-control" placeholder="名前を検索">
+            <input type="text" name="searchword" value="{{$searchword}}" class="form-control" placeholder="キーワードを検索">
         </div>
         <input type="submit" value="検索" class="btn btn-info ml-2">
     </form>
     </div>
     @auth
         <div class="p-2 bd-highlight">
-            <a class="btn btn-info ml-2" href="/profile/{{ $auth_id }}">自分の投稿</a>
+            <a class="btn btn-info ml-2" href="/profile/{{ $auth_id }}">マイページ</a>
         </div>
         <div class="p-2 bd-highlight">
             <a class="btn btn-info ml-2" href="/?id={{ $auth_id }}">お気に入り</a>
