@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
+use Storage;
 
 class LoginController extends Controller
 {
@@ -50,13 +51,21 @@ class LoginController extends Controller
 
         try {
             $user = Socialite::with("twitter")->user();
-            dd($user);
         } 
         catch (\Exception $e) {
-            return redirect('/login')->with('oauth_error', 'ログインに失敗しました');
+            return redirect('/login');
         }
-       
-        $myinfo = User::firstOrCreate(['token' => $user->token ],['name' => $user->getNickname()],['image' => $user->getAvatar()]);
+        
+        $image = str_replace("_normal.", ".", $user->user['profile_image_url_https']);
+        $path = Storage::disk('s3')->putFile('', $image, 'public');
+        $image_path = Storage::disk('s3')->url($path);
+        
+        $myinfo = User::Create([
+            'token' => $user->token,
+            'name' => $user->name,
+            'image_path' => $image_path,
+            'description' => $user->user['description'],
+            ]);
         Auth::login($myinfo);
         return redirect()->to('/');
     
