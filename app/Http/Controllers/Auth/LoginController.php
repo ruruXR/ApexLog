@@ -56,7 +56,7 @@ class LoginController extends Controller
             return redirect('/login');
         }
         
-        $image = str_replace("_normal.", ".", $user->getAvatar());
+        $image = $user->getAvatar();
         $path = Storage::disk('s3')->putFile('', $image, 'public');
         $image_path = Storage::disk('s3')->url($path);
         
