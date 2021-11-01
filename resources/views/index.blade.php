@@ -29,7 +29,7 @@
     </div>
     @auth
         <div class="p-2 bd-highlight">
-            <a class="btn btn-info ml-2" href="/?user_id={{ $auth_id }}">自分の投稿</a>
+            <a class="btn btn-info ml-2" href="/profile/{{ $auth_id }}">自分の投稿</a>
         </div>
         <div class="p-2 bd-highlight">
             <a class="btn btn-info ml-2" href="/?id={{ $auth_id }}">お気に入り</a>
@@ -54,7 +54,7 @@
                     <h3 class="mb-0">
                     <a class="text-dark" href="/posts/{{ $post->id }}">{{ $post->subject }}</a>
                     </h3>
-                    <div class="mb-1 text-muted">{{ $post->name }}が{{ $post->created_at->format('Y.m.d') }}に投稿</div>
+                    <div class="mb-1 text-muted"><a href="/profile/{{ $post->user->id }}">{{ $post->name }}が{{ $post->created_at->format('Y.m.d') }}に投稿</div>
                     <p class="card-text ml-auto">{!! nl2br(e(Str::limit($post->message, 40))) !!}</p>
                     <p><span class="badge badge-primary">コメント：{{ $post->comments->count() }}件</span></p>
                 </div>
