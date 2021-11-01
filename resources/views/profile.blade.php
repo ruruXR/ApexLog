@@ -17,9 +17,7 @@
         @endforeach
     </nav>
 </div>
-
-<div class="d-flex flex-row mt-4 mb-4">
-    <div class="p-2 bd-highlight">
+<div class="p-2 bd-highlight">
     <form class="form-inline" method="GET" action="/">
         <div class="form-group">
             <input type="text" name="searchword" value="{{$searchword}}" class="form-control" placeholder="キーワードを検索">
