@@ -14,7 +14,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/comments', 'CommentController@store');
     Route::post('/like/{post}', 'LikeController@like');
     Route::post('/unlike/{post}', 'LikeController@unlike');
-    Route::get('/profile/{user}', 'profileController@profile');
+    Route::get('/profile/{user}', 'ProfileController@profile');
     Route::get('/contact', 'ContactController@index')->name('contact.index');
     Route::post('/contact/confirm', 'ContactController@confirm')->name('contact.confirm');
     Route::post('/contact/thanks', 'ContactController@send')->name('contact.send');

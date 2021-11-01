@@ -56,17 +56,14 @@ class LoginController extends Controller
             return redirect('/login');
         }
         
-        // $image = str_replace("_normal.", ".", $user->user['profile_image_url_https']);
-        // $path = Storage::disk('s3')->putFile('', $image, 'public');
-        // $image_path = Storage::disk('s3')->url($path);
-        
-        $image = $user->getAvatar();
-        dd($image);
+        $image = str_replace("_normal.", ".", $user->getAvatar);
+        $path = Storage::disk('s3')->putFile('', $image, 'public');
+        $image_path = Storage::disk('s3')->url($path);
         
         $myinfo = User::Create([
             'token' => $user->token,
             'name' => $user->name,
-            // 'image_path' => $image_path,
+            'image_path' => $image_path,
             'description' => $user->user['description'],
             ]);
         Auth::login($myinfo);
