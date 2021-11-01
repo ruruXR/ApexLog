@@ -54,7 +54,7 @@
                     <h3 class="mb-0">
                     <a class="text-dark" href="/posts/{{ $post->id }}">{{ $post->subject }}</a>
                     </h3>
-                    <div class="mb-1 text-muted"><a href="/profile/{{ $post->user->id }}">{{ $post->name }}が{{ $post->created_at->format('Y.m.d') }}に投稿</div>
+                    <div class="mb-1 text-muted"><a href="/profile/{{ $post->user->id }}">{{ $post->name }}</a>が{{ $post->created_at->format('Y.m.d') }}に投稿</div>
                     <p class="card-text ml-auto">{!! nl2br(e(Str::limit($post->message, 40))) !!}</p>
                     <p><span class="badge badge-primary">コメント：{{ $post->comments->count() }}件</span></p>
                 </div>
