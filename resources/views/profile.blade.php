@@ -16,7 +16,11 @@
     </div>
 @endif
 <div class="row jumbotron p-3 p-md-5 text-white rounded bg-dark">
-    @if($user->image_path =! null)
+    @if($user->image_path == null)
+        <div class="col-md-6 mr-3">
+            <img src="https://bbs-backet.s3.ap-northeast-1.amazonaws.com/ROQCH01h3Zx72NhHeYdqUgLWMFQg1yTfxPmddyQP.jpg" class="img-fuild">
+        </div>
+    @else
         <div class="col-md-6 mr-3">
             <img src="{{ $user->image_path }}" class="img-fuild">
         </div>

@@ -59,9 +59,9 @@
                     <p><span class="badge badge-primary">コメント：{{ $post->comments->count() }}件</span></p>
                 </div>
                 @if($post->image_path==null)
-                    <img class="card-img-right flex-auto d-none d-lg-block" style="width: 200px; height: 250px;" src="https://bbs-backet.s3.ap-northeast-1.amazonaws.com/ROQCH01h3Zx72NhHeYdqUgLWMFQg1yTfxPmddyQP.jpg"></img>
+                    <img class="card-img-right flex-auto d-none d-lg-block" style="width: 200px; height: 250px;" src="https://bbs-backet.s3.ap-northeast-1.amazonaws.com/ROQCH01h3Zx72NhHeYdqUgLWMFQg1yTfxPmddyQP.jpg">
                 @else
-                    <img class="card-img-right flex-auto d-none d-lg-block" style="width: 200px; height: 250px;" src="{{ $post->image_path }}"></img>
+                    <img class="card-img-right flex-auto d-none d-lg-block" style="width: 200px; height: 250px;" src="{{ $post->image_path }}">
                 @endif
             </div>
         </div>
