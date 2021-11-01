@@ -10,7 +10,7 @@ use App\Category;
 
 class ProfileController extends Controller
 {
-    public function profile (User $user) 
+    public function profile (User $user,Request $request) 
     {
         $category = new Category;
         $categories = $category->getList();
