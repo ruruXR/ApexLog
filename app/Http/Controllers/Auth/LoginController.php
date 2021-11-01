@@ -61,6 +61,7 @@ class LoginController extends Controller
         // $image_path = Storage::disk('s3')->url($path);
         
         $image = $user->getAvatar();
+        dd($image);
         
         $myinfo = User::Create([
             'token' => $user->token,
