@@ -17,7 +17,7 @@
 @endif
 <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
-        <img src="{{ $user->image_path }}" class="img-fluid mx-auto d-block">
+        <img src="http://pbs.twimg.com/profile_images/1451588484355874819/LFymI3Ya_normal.jpg" class="img-fluid mx-auto d-block">
         <h1 class="display-4 font-italic">{{ $user->name }}</h1>
         <p class="lead my-3">{{ $user->description }}</p>
     </div>
