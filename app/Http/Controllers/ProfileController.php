@@ -26,7 +26,7 @@ class ProfileController extends Controller
         ->PostAt($user->id)
         ->Paginate(10);
         
-        return view('index')->with([
+        return view('profile')->with([
             'posts' => $posts,
             'categories' => $categories,
             'category_id' => $category_id,
