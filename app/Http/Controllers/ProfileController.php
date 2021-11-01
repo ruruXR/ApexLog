@@ -9,13 +9,10 @@ use App\User;
 
 class ProfileController extends Controller
 {
-    public function profile (Request $request) 
+    public function profile (User $user) 
     {
-        $user_id = $request->user_id;
-        $user = User::find($user_id);
-        dd($user_id);
         $posts = Post::with(['comments', 'category'])
-        ->PostAt($user_id)
+        ->PostAt($user->id)
         ->Paginate(10);
         return view('profile')->with([
             'posts' => $posts,
