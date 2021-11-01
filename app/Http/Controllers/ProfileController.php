@@ -13,6 +13,7 @@ class ProfileController extends Controller
     {
         $user_id = $request->user_id;
         $user = User::find($user_id);
+        dd($user);
         $posts = Post::with(['comments', 'category'])
         ->PostAt($user_id)
         ->Paginate(10);
