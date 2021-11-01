@@ -59,7 +59,6 @@ class PostController extends Controller
             ]);
         }else{
         $likePosts = Auth::user()->likePosts()->pluck('post_id');
-        dd($likePosts);
         return view('show')->with([
             'post' => $post,
             'likePosts' => $likePosts,

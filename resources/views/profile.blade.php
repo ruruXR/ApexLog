@@ -16,12 +16,13 @@
     </div>
 @endif
 <div class="row jumbotron p-3 p-md-5 text-white rounded bg-dark">
-    <div class="col-md-6 px-0">
+    @if($user->image_path =! null)
+    <div class="col-md-6 mr-3">
+        <img src="{{ $user->image_path }}" class="img-fuild">
+    </div>
+    <div class="col-md-6">
         <h1 class="display-4 font-italic">{{ $user->name }}</h1>
         <p class="lead my-3">{{ $user->description }}</p>
-    </div>
-    <div class="col-md-6 px-0">
-        <img src="{{ $user->image_path }}" class="img-thumbnail">
     </div>
 </div>
 <div class="row mb-2">
