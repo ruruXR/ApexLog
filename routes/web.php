@@ -14,7 +14,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/comments', 'CommentController@store');
     Route::post('/like/{post}', 'LikeController@like');
     Route::post('/unlike/{post}', 'LikeController@unlike');
-    Route::get('/profile/{user}', 'ProfileController@profile');
     Route::get('/contact', 'ContactController@index')->name('contact.index');
     Route::post('/contact/confirm', 'ContactController@confirm')->name('contact.confirm');
     Route::post('/contact/thanks', 'ContactController@send')->name('contact.send');
@@ -22,3 +21,6 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/','PostController@index');
 Route::get('/posts/{post}', 'PostController@show')->name('show');
+Route::get('/profile/{user}', 'ProfileController@profile')->name('profile.show');
+Route::put('/profile/{user}', 'ProfileController@update');
+Route::get('/profile/{user}/edit', 'ProfileController@edit');

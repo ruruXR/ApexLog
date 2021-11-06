@@ -13,17 +13,26 @@
 <div class="nav-scroller">
     <nav class="nav d-flex justify-content-between">
         @foreach($categories as $id => $name)
-            <a class="p-2 text-muted" href="/?category_id={{ $id }}">{{ $name }}</a>
+            <a class="p-2 text-muted" href="/profile/{{ $user->id }}?category_id={{ $id }}">{{ $name }}</a>
         @endforeach
     </nav>
 </div>
-<div class="p-2 bd-highlight">
-    <form class="form-inline" method="GET" action="/">
+<div class="d-flex flex-row mt-4 mb-4">
+    <div class="p-2 bd-highlight">
+    <form class="form-inline" method="GET" action="/profile/{{ $user->id }}">
         <div class="form-group">
             <input type="text" name="searchword" value="{{$searchword}}" class="form-control" placeholder="キーワードを検索">
         </div>
         <input type="submit" value="検索" class="btn btn-info ml-2">
     </form>
+    </div>
+    <div class="p-2 bd-highlight">
+        <a class="btn btn-info ml-2" href="/">一覧</a>
+    </div>
+    <div class="p-2 bd-highlight">
+        <a class="btn btn-info ml-2" href="/profile/{{ $user->id }}/edit">変更</a>
+    </div>
+        
 </div>
 @if (session('poststatus'))
     <div class="alert alert-success mt-4 mb-4">

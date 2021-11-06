@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
 use App\Category;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -33,5 +34,33 @@ class ProfileController extends Controller
             'searchword' => $searchword,
             'user' => $user,
             ]);
+    }
+    
+    public function edit(User $user)
+    {
+        return view('profileedit')->with(['user' => $user]);
+    }
+    
+    public function update(Request $request,User $user)
+    {
+        // 画像が投稿された場合にs3に保存
+        $image_path = null;
+        if($request->hasFile('image'))
+        {
+            $image = $request->file('image');
+            $path = Storage::disk('s3')->putFile('', $image, 'public');
+            $image_path = Storage::disk('s3')->url($path);   
+        }
+        
+        $user_id = $user->id;
+        
+        // 保存
+        $savedata = [
+        'name' => $request->name,
+        'description' => $request->description,
+        'image_path' => $image_path,
+        ];
+        $user->fill($savedata)->save();
+        return redirect()->route('profile.show',['user' => $user_id])->with('poststatus', 'プロフィールを編集しました');
     }
 }
