@@ -25,6 +25,7 @@ class PostController extends Controller
         $user_id = $request->user_id;
         $id = $request->id;
         
+        //ソート
         $posts = Post::with(['comments', 'category'])
         ->categoryAt($category_id)
         ->fuzzyNameMessage($searchword)
@@ -50,14 +51,15 @@ class PostController extends Controller
             $url = url()->previous();
         }
         
+        //ログイン時のみお気に入りの情報をviewに渡す
         $user_id = Auth::id();
         
-        if($user_id == null){
+        if ($user_id == null) {
             return view('show')->with([
             'post' => $post,
             'url' => $url,
             ]);
-        }else{
+        } else {
         $likePosts = Auth::user()->likePosts()->pluck('post_id');
         return view('show')->with([
             'post' => $post,
@@ -130,12 +132,12 @@ class PostController extends Controller
     }
     public function destroy(Post $post)
     {
-        
-        if(Gate::allows('isAdmin')){
+        //管理者のみすべての削除が可能
+        if (Gate::allows('isAdmin')) {
             $post->comments()->delete();
             $post->delete();
             return redirect('/')->with('poststatus', '投稿を削除しました');;
-        }else{
+        } else {
             $this->authorize('delete', $post);
             $post->comments()->delete();
             $post->delete();

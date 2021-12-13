@@ -47,8 +47,9 @@ class LoginController extends Controller
         return Socialite::driver('twitter')->redirect();
     }
     
-    public function handleTwitterProviderCallback(){
-
+    public function handleTwitterProviderCallback()
+    {
+        //Twitterから情報を受け取る
         try {
             $user = Socialite::with("twitter")->user();
         } 
@@ -56,8 +57,10 @@ class LoginController extends Controller
             return redirect('/login');
         }
         
+        //画像を大きいサイズに変更
         $image = str_replace("_normal.", ".", $user->getAvatar());
         
+        //ユーザー作成
         $myinfo = User::Create([
             'token' => $user->token,
             'name' => $user->name,
